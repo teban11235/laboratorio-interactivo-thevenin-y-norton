@@ -1,0 +1,6 @@
+{
+  "name": "Laboratorio Interactivo de Circuitos Eléctricos — Ing. Esteban Briceño Sánchez",
+  "description": "Recurso interactivo de simulación para el estudio de linealidad, principio de superposición, teorema de Thévenin y teorema de Norton en circuitos eléctricos en DC. Docente: Esteban Briceño Sánchez.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
