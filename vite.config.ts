@@ -5,6 +5,11 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // GitHub Pages hosts this project under /<repository-name>/.
+    // Keep local development at the site root.
+    base: process.env.GITHUB_ACTIONS
+      ? '/laboratorio-interactivo-thevenin-y-norton/'
+      : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
