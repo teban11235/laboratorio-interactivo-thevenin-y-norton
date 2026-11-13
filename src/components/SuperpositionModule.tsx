@@ -140,7 +140,7 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
             </div>
 
             <div className="circuit-grid border border-slate-200 rounded-lg p-4">
-              <svg viewBox="0 0 640 280" className="w-full h-auto">
+              <svg viewBox="-20 0 690 280" className="w-full h-auto">
                 {/* Main Top & Bottom Wires */}
                 {/* Left loop top wire through R1 to Node N */}
                 <line x1="85" y1="65" x2="145" y2="65" stroke="#334155" strokeWidth="2.5" />

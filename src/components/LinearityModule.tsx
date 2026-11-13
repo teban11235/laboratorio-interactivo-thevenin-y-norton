@@ -120,17 +120,17 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                       v = i · R = {v1.toFixed(2)} V
                     </span>
                   </div>
-                  <svg viewBox="0 0 320 175" className="w-full h-auto">
+                  <svg viewBox="0 0 430 185" className="w-full h-auto">
                     {/* Wires */}
                     <path
-                      d="M 65 45 L 235 45 L 235 65 M 235 115 L 235 140 L 65 140 L 65 115 M 65 65 L 65 45"
+                      d="M 115 45 L 270 45 L 270 65 M 270 115 L 270 140 L 115 140 L 115 115 M 115 65 L 115 45"
                       fill="none"
                       stroke="#334155"
                       strokeWidth="2.5"
                     />
                     {/* Animated Current */}
                     <path
-                      d="M 65 45 L 235 45 L 235 140 L 65 140 Z"
+                      d="M 115 45 L 270 45 L 270 140 L 115 140 Z"
                       fill="none"
                       stroke="#0284c7"
                       strokeWidth="2.5"
@@ -138,35 +138,38 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                       opacity="0.75"
                     />
                     {/* Current Source */}
-                    <circle cx="65" cy="90" r="24" fill="#ffffff" stroke="#0284c7" strokeWidth="2.5" />
-                    <line x1="65" y1="104" x2="65" y2="78" stroke="#0284c7" strokeWidth="2.5" />
-                    <polygon points="65,72 60,81 70,81" fill="#0284c7" />
-                    <text x="28" y="94" textAnchor="end" className="text-[12px] font-mono font-semibold fill-sky-700">
+                    <circle cx="115" cy="90" r="24" fill="#ffffff" stroke="#0284c7" strokeWidth="2.5" />
+                    <line x1="115" y1="104" x2="115" y2="78" stroke="#0284c7" strokeWidth="2.5" />
+                    <polygon points="115,72 110,81 120,81" fill="#0284c7" />
+                    <text x="82" y="86" textAnchor="end" className="text-[11px] font-mono font-semibold fill-sky-700">
+                      i₁
+                    </text>
+                    <text x="82" y="102" textAnchor="end" className="text-[12px] font-mono font-semibold fill-sky-700">
                       {i1.toFixed(1)} A
                     </text>
 
                     {/* Current Arrow Top */}
-                    <polygon points="155,45 145,40 145,50" fill="#d97706" />
-                    <text x="150" y="34" textAnchor="middle" className="text-[12px] font-mono font-semibold fill-amber-700">
+                    <polygon points="198,45 188,40 188,50" fill="#d97706" />
+                    <text x="193" y="33" textAnchor="middle" className="text-[12px] font-mono font-semibold fill-amber-700">
                       i = {i1.toFixed(1)} A
                     </text>
 
                     {/* Resistor R */}
-                    <rect x="219" y="65" width="32" height="50" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
+                    <rect x="254" y="65" width="32" height="50" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <path
-                      d="M 235 68 L 227 74 L 243 82 L 227 90 L 243 98 L 227 106 L 235 112"
+                      d="M 270 68 L 262 74 L 278 82 L 262 90 L 278 98 L 262 106 L 270 112"
                       fill="none"
                       stroke="#059669"
                       strokeWidth="2"
                     />
-                    <text x="259" y="88" className="text-[12px] font-mono font-semibold fill-emerald-800">
+                    <text x="296" y="86" className="text-[12px] font-mono font-semibold fill-emerald-800">
                       R = {safeR.toFixed(1)} Ω
                     </text>
-                    <text x="259" y="105" className="text-[12px] font-mono font-bold fill-sky-700">
+                    <text x="296" y="105" className="text-[12px] font-mono font-bold fill-sky-700">
                       v = {v1.toFixed(2)} V
                     </text>
-                    <text x="208" y="72" className="text-[13px] font-mono font-bold fill-slate-700">+</text>
-                    <text x="208" y="116" className="text-[13px] font-mono font-bold fill-slate-700">−</text>
+                    <text x="242" y="72" className="text-[13px] font-mono font-bold fill-slate-700">+</text>
+                    <text x="242" y="116" className="text-[13px] font-mono font-bold fill-slate-700">−</text>
                   </svg>
                 </div>
 
@@ -178,15 +181,15 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                       k·v = (k·i)R = {scaledV.toFixed(2)} V
                     </span>
                   </div>
-                  <svg viewBox="0 0 320 175" className="w-full h-auto">
+                  <svg viewBox="0 0 430 185" className="w-full h-auto">
                     <path
-                      d="M 65 45 L 235 45 L 235 65 M 235 115 L 235 140 L 65 140 L 65 115 M 65 65 L 65 45"
+                      d="M 115 45 L 270 45 L 270 65 M 270 115 L 270 140 L 115 140 L 115 115 M 115 65 L 115 45"
                       fill="none"
                       stroke="#334155"
                       strokeWidth="2.5"
                     />
                     <path
-                      d="M 65 45 L 235 45 L 235 140 L 65 140 Z"
+                      d="M 115 45 L 270 45 L 270 140 L 115 140 Z"
                       fill="none"
                       stroke="#0284c7"
                       strokeWidth="3"
@@ -194,38 +197,38 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                       opacity="0.85"
                     />
                     {/* Scaled Source */}
-                    <circle cx="65" cy="90" r="24" fill="#ffffff" stroke="#0284c7" strokeWidth="2.5" />
-                    <line x1="65" y1="104" x2="65" y2="78" stroke="#0284c7" strokeWidth="2.5" />
-                    <polygon points="65,72 60,81 70,81" fill="#0284c7" />
-                    <text x="35" y="88" textAnchor="end" className="text-[11px] font-mono font-semibold fill-sky-700">
+                    <circle cx="115" cy="90" r="24" fill="#ffffff" stroke="#0284c7" strokeWidth="2.5" />
+                    <line x1="115" y1="104" x2="115" y2="78" stroke="#0284c7" strokeWidth="2.5" />
+                    <polygon points="115,72 110,81 120,81" fill="#0284c7" />
+                    <text x="82" y="86" textAnchor="end" className="text-[11px] font-mono font-semibold fill-sky-700">
                       k·i
                     </text>
-                    <text x="35" y="102" textAnchor="end" className="text-[12px] font-mono font-bold fill-sky-800">
+                    <text x="82" y="102" textAnchor="end" className="text-[12px] font-mono font-bold fill-sky-800">
                       {scaledI.toFixed(2)} A
                     </text>
 
                     {/* Current Arrow Top */}
-                    <polygon points="155,45 145,40 145,50" fill="#d97706" />
-                    <text x="150" y="34" textAnchor="middle" className="text-[12px] font-mono font-semibold fill-amber-700">
+                    <polygon points="198,45 188,40 188,50" fill="#d97706" />
+                    <text x="193" y="33" textAnchor="middle" className="text-[12px] font-mono font-semibold fill-amber-700">
                       k·i = {scaledI.toFixed(2)} A
                     </text>
 
                     {/* Resistor R */}
-                    <rect x="219" y="65" width="32" height="50" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
+                    <rect x="254" y="65" width="32" height="50" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <path
-                      d="M 235 68 L 227 74 L 243 82 L 227 90 L 243 98 L 227 106 L 235 112"
+                      d="M 270 68 L 262 74 L 278 82 L 262 90 L 278 98 L 262 106 L 270 112"
                       fill="none"
                       stroke="#059669"
                       strokeWidth="2"
                     />
-                    <text x="256" y="88" className="text-[12px] font-mono font-semibold fill-emerald-800">
+                    <text x="296" y="86" className="text-[12px] font-mono font-semibold fill-emerald-800">
                       R = {safeR.toFixed(1)} Ω
                     </text>
-                    <text x="256" y="105" className="text-[12px] font-mono font-bold fill-sky-700">
+                    <text x="296" y="105" className="text-[12px] font-mono font-bold fill-sky-700">
                       kv = {scaledV.toFixed(2)} V
                     </text>
-                    <text x="208" y="72" className="text-[13px] font-mono font-bold fill-slate-700">+</text>
-                    <text x="208" y="116" className="text-[13px] font-mono font-bold fill-slate-700">−</text>
+                    <text x="242" y="72" className="text-[13px] font-mono font-bold fill-slate-700">+</text>
+                    <text x="242" y="116" className="text-[13px] font-mono font-bold fill-slate-700">−</text>
                   </svg>
                 </div>
               </div>
@@ -239,16 +242,16 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                       v = (i₁ + i₂)R = {vSumActual.toFixed(2)} V
                     </span>
                   </div>
-                  <svg viewBox="0 0 320 185" className="w-full h-auto">
+                  <svg viewBox="0 0 430 190" className="w-full h-auto">
                     {/* Parallel current sources feeding R */}
                     <path
-                      d="M 55 45 L 240 45 L 240 65 M 240 120 L 240 145 L 55 145 M 55 45 L 55 70 M 55 120 L 55 145 M 120 45 L 120 70 M 120 120 L 120 145"
+                      d="M 70 45 L 265 45 L 265 65 M 265 120 L 265 145 L 70 145 M 70 45 L 70 70 M 70 120 L 70 145 M 145 45 L 145 70 M 145 120 L 145 145"
                       fill="none"
                       stroke="#334155"
                       strokeWidth="2.5"
                     />
                     <path
-                      d="M 120 45 L 240 45 L 240 145 L 120 145"
+                      d="M 145 45 L 265 45 L 265 145 L 145 145"
                       fill="none"
                       stroke="#0284c7"
                       strokeWidth="2.5"
@@ -256,39 +259,39 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                       opacity="0.8"
                     />
                     {/* Source i1 */}
-                    <circle cx="55" cy="95" r="22" fill="#ffffff" stroke="#0284c7" strokeWidth="2.2" />
-                    <line x1="55" y1="108" x2="55" y2="84" stroke="#0284c7" strokeWidth="2.2" />
-                    <polygon points="55,78 50,86 60,86" fill="#0284c7" />
-                    <text x="55" y="164" textAnchor="middle" className="text-[11px] font-mono font-semibold fill-sky-700">
+                    <circle cx="70" cy="95" r="22" fill="#ffffff" stroke="#0284c7" strokeWidth="2.2" />
+                    <line x1="70" y1="108" x2="70" y2="84" stroke="#0284c7" strokeWidth="2.2" />
+                    <polygon points="70,78 65,86 75,86" fill="#0284c7" />
+                    <text x="70" y="164" textAnchor="middle" className="text-[11px] font-mono font-semibold fill-sky-700">
                       i₁ = {i1.toFixed(1)} A
                     </text>
 
                     {/* Source i2 */}
-                    <circle cx="120" cy="95" r="22" fill="#ffffff" stroke="#d97706" strokeWidth="2.2" />
-                    <line x1="120" y1="108" x2="120" y2="84" stroke="#d97706" strokeWidth="2.2" />
-                    <polygon points="120,78 115,86 125,86" fill="#d97706" />
-                    <text x="120" y="164" textAnchor="middle" className="text-[11px] font-mono font-semibold fill-amber-700">
+                    <circle cx="145" cy="95" r="22" fill="#ffffff" stroke="#d97706" strokeWidth="2.2" />
+                    <line x1="145" y1="108" x2="145" y2="84" stroke="#d97706" strokeWidth="2.2" />
+                    <polygon points="145,78 140,86 150,86" fill="#d97706" />
+                    <text x="145" y="164" textAnchor="middle" className="text-[11px] font-mono font-semibold fill-amber-700">
                       i₂ = {i2.toFixed(1)} A
                     </text>
 
                     {/* Combined current label */}
-                    <text x="182" y="35" textAnchor="middle" className="text-[11px] font-mono font-bold fill-slate-800">
+                    <text x="205" y="34" textAnchor="middle" className="text-[11px] font-mono font-bold fill-slate-800">
                       i₁+i₂ = {iSum.toFixed(1)} A
                     </text>
 
                     {/* Resistor R */}
-                    <rect x="224" y="65" width="32" height="55" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
+                    <rect x="249" y="65" width="32" height="55" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <path
-                      d="M 240 70 L 232 76 L 248 84 L 232 92 L 248 100 L 232 108 L 240 115"
+                      d="M 265 70 L 257 76 L 273 84 L 257 92 L 273 100 L 257 108 L 265 115"
                       fill="none"
                       stroke="#059669"
                       strokeWidth="2"
                     />
-                    <text x="262" y="88" className="text-[11px] font-mono font-semibold fill-emerald-800">
+                    <text x="292" y="88" className="text-[11px] font-mono font-semibold fill-emerald-800">
                       R = {safeR.toFixed(1)} Ω
                     </text>
-                    <text x="262" y="106" className="text-[11px] font-mono font-bold fill-sky-700">
-                      v = {vSumActual.toFixed(1)} V
+                    <text x="292" y="107" className="text-[11px] font-mono font-bold fill-sky-700">
+                      v = {vSumActual.toFixed(2)} V
                     </text>
                   </svg>
                 </div>

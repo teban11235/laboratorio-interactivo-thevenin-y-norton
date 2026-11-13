@@ -68,22 +68,20 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
           <button
             type="button"
             onClick={() => setView('shortCircuit')}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              view === 'shortCircuit'
+            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${view === 'shortCircuit'
                 ? 'bg-white text-amber-700 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             1. Corriente de Cortocircuito (I_N) y R_N
           </button>
           <button
             type="button"
             onClick={() => setView('transformation')}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              view === 'transformation'
+            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${view === 'transformation'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             2. Conversión Thévenin ↔ Norton con Carga R_L
           </button>
@@ -121,7 +119,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     <span>a) Medición de Corriente de Cortocircuito</span>
                     <span className="font-mono text-amber-700 tabular-nums">I_N = I_corto = {iNorton.toFixed(2)} A</span>
                   </div>
-                  <svg viewBox="0 0 340 205" className="w-full h-auto">
+                  <svg viewBox="0 0 385 205" className="w-full h-auto">
                     {/* Two-terminal linear network box */}
                     <rect
                       x="25"
@@ -180,7 +178,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     <span>b) Circuito Equivalente de Norton</span>
                     <span className="font-mono text-emerald-700 tabular-nums">R_N = R_Th = {safeR.toFixed(1)} Ω</span>
                   </div>
-                  <svg viewBox="0 0 340 205" className="w-full h-auto">
+                  <svg viewBox="0 0 385 205" className="w-full h-auto">
                     {/* Parallel Wires */}
                     <line x1="75" y1="55" x2="270" y2="55" stroke="#334155" strokeWidth="2.5" />
                     <line x1="75" y1="150" x2="270" y2="150" stroke="#334155" strokeWidth="2.5" />
@@ -231,21 +229,21 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                       V_ab = {vAbThevenin.toFixed(2)} V · I_L = {iLoadThevenin.toFixed(2)} A
                     </span>
                   </div>
-                  <svg viewBox="0 0 340 205" className="w-full h-auto">
+                  <svg viewBox="0 0 385 205" className="w-full h-auto">
                     <path
-                      d="M 65 80 L 65 50 L 110 50 M 175 50 L 230 50 M 230 160 L 65 160 L 65 130"
+                      d="M 80 80 L 80 50 L 125 50 M 190 50 L 250 50 M 250 160 L 80 160 L 80 130"
                       fill="none"
                       stroke="#334155"
                       strokeWidth="2.5"
                     />
                     <path
-                      d="M 235 50 L 288 50 L 288 78 M 288 132 L 288 160 L 235 160"
+                      d="M 255 50 L 315 50 L 315 78 M 315 132 L 315 160 L 255 160"
                       fill="none"
                       stroke="#059669"
                       strokeWidth="2.5"
                     />
                     <path
-                      d="M 65 50 L 288 50 L 288 160 L 65 160 Z"
+                      d="M 80 50 L 315 50 L 315 160 L 80 160 Z"
                       fill="none"
                       stroke="#0284c7"
                       strokeWidth="2.5"
@@ -254,31 +252,31 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     />
 
                     {/* V_Th */}
-                    <circle cx="65" cy="105" r="23" fill="#f0f9ff" stroke="#0284c7" strokeWidth="2.5" />
-                    <text x="65" y="100" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
-                    <text x="65" y="117" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">−</text>
-                    <text x="65" y="182" textAnchor="middle" className="text-[11px] font-mono font-bold fill-sky-800">
+                    <circle cx="80" cy="105" r="23" fill="#f0f9ff" stroke="#0284c7" strokeWidth="2.5" />
+                    <text x="80" y="100" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
+                    <text x="80" y="117" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">−</text>
+                    <text x="115" y="184" textAnchor="middle" className="text-[11px] font-mono font-bold fill-sky-800">
                       V_Th = I_N·R_N = {vTh.toFixed(2)} V
                     </text>
 
                     {/* R_Th */}
-                    <rect x="110" y="37" width="65" height="26" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.2" />
-                    <text x="142" y="54" textAnchor="middle" className="text-[11px] font-mono font-bold fill-emerald-800">
+                    <rect x="125" y="37" width="65" height="26" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.2" />
+                    <text x="157" y="54" textAnchor="middle" className="text-[11px] font-mono font-bold fill-emerald-800">
                       R_Th={safeR}Ω
                     </text>
 
                     {/* Terminals a and b */}
-                    <circle cx="230" cy="50" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
-                    <text x="230" y="38" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">a</text>
-                    <circle cx="230" cy="160" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
-                    <text x="230" y="178" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">b</text>
+                    <circle cx="250" cy="50" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
+                    <text x="250" y="38" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">a</text>
+                    <circle cx="250" cy="160" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
+                    <text x="250" y="178" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">b</text>
 
                     {/* Load R_L */}
-                    <rect x="272" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
-                    <text x="288" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
+                    <rect x="299" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
+                    <text x="315" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
                       R_L
                     </text>
-                    <text x="288" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
+                    <text x="315" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
                     </text>
                   </svg>
@@ -292,23 +290,23 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                       V_ab = {vAbNorton.toFixed(2)} V · I_L = {iLoadNorton.toFixed(2)} A
                     </span>
                   </div>
-                  <svg viewBox="0 0 340 205" className="w-full h-auto">
-                    <line x1="60" y1="50" x2="230" y2="50" stroke="#334155" strokeWidth="2.5" />
-                    <line x1="60" y1="160" x2="230" y2="160" stroke="#334155" strokeWidth="2.5" />
-                    <line x1="60" y1="50" x2="60" y2="82" stroke="#334155" strokeWidth="2.5" />
-                    <line x1="60" y1="128" x2="60" y2="160" stroke="#334155" strokeWidth="2.5" />
-                    <line x1="150" y1="50" x2="150" y2="78" stroke="#334155" strokeWidth="2.5" />
-                    <line x1="150" y1="132" x2="150" y2="160" stroke="#334155" strokeWidth="2.5" />
+                  <svg viewBox="0 0 385 205" className="w-full h-auto">
+                    <line x1="80" y1="50" x2="250" y2="50" stroke="#334155" strokeWidth="2.5" />
+                    <line x1="80" y1="160" x2="250" y2="160" stroke="#334155" strokeWidth="2.5" />
+                    <line x1="80" y1="50" x2="80" y2="82" stroke="#334155" strokeWidth="2.5" />
+                    <line x1="80" y1="128" x2="80" y2="160" stroke="#334155" strokeWidth="2.5" />
+                    <line x1="165" y1="50" x2="165" y2="78" stroke="#334155" strokeWidth="2.5" />
+                    <line x1="165" y1="132" x2="165" y2="160" stroke="#334155" strokeWidth="2.5" />
 
                     {/* External Load R_L */}
                     <path
-                      d="M 235 50 L 288 50 L 288 78 M 288 132 L 288 160 L 235 160"
+                      d="M 255 50 L 315 50 L 315 78 M 315 132 L 315 160 L 255 160"
                       fill="none"
                       stroke="#059669"
                       strokeWidth="2.5"
                     />
                     <path
-                      d="M 60 50 L 288 50 L 288 160 L 60 160 Z"
+                      d="M 80 50 L 315 50 L 315 160 L 80 160 Z"
                       fill="none"
                       stroke="#d97706"
                       strokeWidth="2.5"
@@ -317,34 +315,34 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     />
 
                     {/* I_N */}
-                    <circle cx="60" cy="105" r="23" fill="#fffbeb" stroke="#d97706" strokeWidth="2.5" />
-                    <line x1="60" y1="118" x2="60" y2="94" stroke="#d97706" strokeWidth="2.5" />
-                    <polygon points="60,87 55,96 65,96" fill="#d97706" />
-                    <text x="65" y="182" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-800">
+                    <circle cx="80" cy="105" r="23" fill="#fffbeb" stroke="#d97706" strokeWidth="2.5" />
+                    <line x1="80" y1="118" x2="80" y2="94" stroke="#d97706" strokeWidth="2.5" />
+                    <polygon points="80,87 75,96 85,96" fill="#d97706" />
+                    <text x="115" y="184" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-800">
                       I_N = V_Th/R_Th = {iNorton.toFixed(2)} A
                     </text>
 
                     {/* R_N */}
-                    <rect x="134" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.2" />
-                    <text x="150" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
+                    <rect x="149" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.2" />
+                    <text x="165" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
                       R_N
                     </text>
-                    <text x="150" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
+                    <text x="165" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeR}Ω
                     </text>
 
                     {/* Terminals a and b */}
-                    <circle cx="230" cy="50" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
-                    <text x="230" y="38" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">a</text>
-                    <circle cx="230" cy="160" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
-                    <text x="230" y="178" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">b</text>
+                    <circle cx="250" cy="50" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
+                    <text x="250" y="38" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">a</text>
+                    <circle cx="250" cy="160" r="4.5" fill="#fff" stroke="#0f172a" strokeWidth="2.5" />
+                    <text x="250" y="178" textAnchor="middle" className="text-[12px] font-mono font-bold fill-slate-900">b</text>
 
                     {/* Load R_L */}
-                    <rect x="272" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
-                    <text x="288" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
+                    <rect x="299" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
+                    <text x="315" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
                       R_L
                     </text>
-                    <text x="288" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
+                    <text x="315" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
                     </text>
                   </svg>

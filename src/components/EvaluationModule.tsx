@@ -246,7 +246,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
 
               {/* Schematic of the Problem */}
               <div className="circuit-grid border border-slate-200 rounded-lg p-4 mb-6">
-                <svg viewBox="0 0 580 205" className="w-full h-auto">
+                <svg viewBox="-35 0 650 205" className="w-full h-auto">
                   <line x1="75" y1="50" x2="140" y2="50" stroke="#334155" strokeWidth="2.5" />
                   <line x1="220" y1="50" x2="415" y2="50" stroke="#334155" strokeWidth="2.5" />
                   <line x1="75" y1="165" x2="415" y2="165" stroke="#334155" strokeWidth="2.5" />

@@ -261,7 +261,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     <span>b) Equivalente de Thévenin + Carga R_L</span>
                     <span className="font-mono text-sky-700 tabular-nums">I_L = {iLoad.toFixed(2)} A</span>
                   </div>
-                  <svg viewBox="0 0 360 215" className="w-full h-auto">
+                  <svg viewBox="0 0 410 215" className="w-full h-auto">
                     {/* Dashed box representing Thévenin Equivalent */}
                     <rect
                       x="20"
@@ -306,7 +306,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     <circle cx="68" cy="118" r="24" fill="#ffffff" stroke="#0284c7" strokeWidth="2.5" />
                     <text x="68" y="113" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
                     <text x="68" y="130" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">−</text>
-                    <text x="68" y="160" textAnchor="middle" className="text-[11px] font-mono font-bold fill-sky-800">
+                    <text x="85" y="160" textAnchor="middle" className="text-[11px] font-mono font-bold fill-sky-800">
                       V_Th = {vTh.toFixed(1)} V
                     </text>
 
@@ -336,8 +336,11 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     <text x="308" y="128" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
                     </text>
-                    <text x="275" y="120" textAnchor="end" className="text-[11px] font-mono font-bold fill-sky-700">
-                      V_ab={vAb.toFixed(1)}V
+                    <text x="332" y="112" className="text-[11px] font-mono font-bold fill-sky-700">
+                      V_ab
+                    </text>
+                    <text x="332" y="128" className="text-[11px] font-mono font-bold fill-sky-700">
+                      {vAb.toFixed(1)} V
                     </text>
                   </svg>
                 </div>
@@ -345,7 +348,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
             ) : (
               /* Detailed Step View for Step 1 (V_oc) or Step 2 (R_Th) */
               <div className="circuit-grid border border-slate-200 rounded-lg p-5">
-                <svg viewBox="0 0 600 220" className="w-full h-auto">
+                <svg viewBox="-45 0 675 220" className="w-full h-auto">
                   {/* Top & Bottom Wires */}
                   <line x1="80" y1="55" x2="140" y2="55" stroke="#334155" strokeWidth="2.5" />
                   <line x1="220" y1="55" x2="380" y2="55" stroke="#334155" strokeWidth="2.5" />
