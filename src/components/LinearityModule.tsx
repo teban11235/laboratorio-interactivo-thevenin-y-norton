@@ -66,22 +66,20 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
           <button
             type="button"
             onClick={() => setSubTab('homogeneity')}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              subTab === 'homogeneity'
+            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${subTab === 'homogeneity'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             a. Homogeneidad (Escalamiento)
           </button>
           <button
             type="button"
             onClick={() => setSubTab('additivity')}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              subTab === 'additivity'
+            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${subTab === 'additivity'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             b. Aditividad y Trampa de Potencia
           </button>
@@ -302,7 +300,7 @@ export const LinearityModule: React.FC<LinearityModuleProps> = ({ isPresentation
                     <div className="flex items-center justify-between text-xs font-semibold text-slate-800 mb-1">
                       <span>Demostración Geométrica: P = (i₁ + i₂)² · R</span>
                       <span className="font-mono text-red-600 tabular-nums">
-                        P_total ≠ P₁ + P₂
+                        P<sub>total</sub> ≠ P₁ + P₂
                       </span>
                     </div>
                     <p className="text-xs text-slate-600 mb-3">

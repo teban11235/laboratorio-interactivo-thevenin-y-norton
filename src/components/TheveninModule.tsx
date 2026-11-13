@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ParameterControl } from './ParameterControl';
+import { renderSvgMathText } from '../utils/mathFormat';
 import { ArrowRightLeft, CheckCircle2, RotateCcw, Sliders } from 'lucide-react';
 
 interface TheveninModuleProps {
@@ -65,12 +66,12 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
             <span>Fuente de Tensión en Serie con Resistencia</span>
           </div>
           <h2 className={`font-display font-bold text-slate-900 ${isPresentationMode ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl'}`}>
-            Teorema de Thévenin y Efecto de la Carga Variable (R_L)
+            Teorema de Thévenin y Efecto de la Carga Variable (R<sub>L</sub>)
           </h2>
           <p className={`text-slate-600 mt-1 w-full ${isPresentationMode ? 'text-base sm:text-lg' : 'text-sm'}`}>
             Permite reemplazar toda la parte fija de una red lineal de dos terminales por una fuente de tensión{' '}
-            <span className="font-mono font-semibold text-sky-700">V_Th = V_oc</span> en serie con una resistencia{' '}
-            <span className="font-mono font-semibold text-emerald-700">R_Th = R_eq</span>, evitando recalcular toda la red cada vez que cambia la carga <span className="font-mono font-semibold">R_L</span>.
+            <span className="font-mono font-semibold text-sky-700">V<sub>Th</sub> = V<sub>oc</sub></span> en serie con una resistencia{' '}
+            <span className="font-mono font-semibold text-emerald-700">R<sub>Th</sub> = R<sub>eq</sub></span>, evitando recalcular toda la red cada vez que cambia la carga <span className="font-mono font-semibold">R<sub>L</sub></span>.
           </p>
         </div>
 
@@ -79,35 +80,32 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
           <button
             type="button"
             onClick={() => setStage('voc')}
-            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              stage === 'voc'
+            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${stage === 'voc'
                 ? 'bg-white text-sky-700 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
-            Paso 1: Hallar V_Th = V_oc
+            Paso 1: Hallar V<sub>Th</sub> = V<sub>oc</sub>
           </button>
           <button
             type="button"
             onClick={() => setStage('rth')}
-            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              stage === 'rth'
+            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${stage === 'rth'
                 ? 'bg-white text-emerald-700 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
-            Paso 2: Hallar R_Th = R_eq
+            Paso 2: Hallar R<sub>Th</sub> = R<sub>eq</sub>
           </button>
           <button
             type="button"
             onClick={() => setStage('compare')}
-            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              stage === 'compare'
+            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${stage === 'compare'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
-            Paso 3: Conectar R_L y Comparar
+            Paso 3: Conectar R<sub>L</sub> y Comparar
           </button>
         </div>
       </div>
@@ -120,17 +118,26 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
               <div>
                 <h3 className={`font-display font-bold text-slate-900 ${isPresentationMode ? 'text-xl' : 'text-base'}`}>
-                  {stage === 'voc' && 'Paso 1: Desconectar la carga R_L y medir el voltaje en circuito abierto (V_Th = V_oc)'}
-                  {stage === 'rth' && 'Paso 2: Apagar las fuentes independientes y hallar la resistencia equivalente (R_Th)'}
-                  {stage === 'compare' && 'Paso 3: Equivalencia exacta entre la Red Original y el Circuito Equivalente de Thévenin'}
+                  {stage === 'voc' && (
+                    <>Paso 1: Desconectar la carga R<sub>L</sub> y medir el voltaje en circuito abierto (V<sub>Th</sub> = V<sub>oc</sub>)</>
+                  )}
+                  {stage === 'rth' && (
+                    <>Paso 2: Apagar las fuentes independientes y hallar la resistencia equivalente (R<sub>Th</sub>)</>
+                  )}
+                  {stage === 'compare' && (
+                    <>Paso 3: Equivalencia exacta entre la Red Original y el Circuito Equivalente de Thévenin</>
+                  )}
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  {stage === 'voc' &&
-                    'Con los terminales a–b abiertos, no circula corriente por R₃ y el voltaje medido en bornes es V_Th.'}
-                  {stage === 'rth' &&
-                    'Fuente de tensión V_s → cortocircuito (0 V); fuente de corriente I_s → circuito abierto (0 A).'}
-                  {stage === 'compare' &&
-                    'Ambos circuitos producen exactamente la misma corriente I_L y tensión V_ab sobre cualquier carga R_L.'}
+                  {stage === 'voc' && (
+                    <>Con los terminales a–b abiertos, no circula corriente por R₃ y el voltaje medido en bornes es V<sub>Th</sub>.</>
+                  )}
+                  {stage === 'rth' && (
+                    <>Fuente de tensión V<sub>s</sub> → cortocircuito (0 V); fuente de corriente I<sub>s</sub> → circuito abierto (0 A).</>
+                  )}
+                  {stage === 'compare' && (
+                    <>Ambos circuitos producen exactamente la misma corriente I<sub>L</sub> y tensión V<sub>ab</sub> sobre cualquier carga R<sub>L</sub>.</>
+                  )}
                 </p>
               </div>
 
@@ -145,11 +152,10 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                       setRLoad(val);
                       setStage('compare');
                     }}
-                    className={`px-2.5 py-1 rounded-md font-semibold transition-colors cursor-pointer ${
-                      Math.abs(safeRL - val) < 0.01
+                    className={`px-2.5 py-1 rounded-md font-semibold transition-colors cursor-pointer ${Math.abs(safeRL - val) < 0.01
                         ? 'bg-emerald-600 text-white'
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                    }`}
+                      }`}
                   >
                     {val} Ω
                   </button>
@@ -162,8 +168,8 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                 {/* Left: Full Linear Network with Load R_L */}
                 <div className="circuit-grid border border-slate-200 rounded-lg p-4">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
-                    <span>a) Red Lineal Original + Carga R_L</span>
-                    <span className="font-mono text-sky-700 tabular-nums">I_L = {iLoad.toFixed(2)} A</span>
+                    <span>a) Red Lineal Original + Carga R<sub>L</sub></span>
+                    <span className="font-mono text-sky-700 tabular-nums">I<sub>L</sub> = {iLoad.toFixed(2)} A</span>
                   </div>
                   <svg viewBox="0 0 360 215" className="w-full h-auto">
                     {/* Dashed box representing fixed two-terminal network */}
@@ -247,7 +253,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     />
                     <rect x="296" y="90" width="32" height="55" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <text x="312" y="114" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
-                      R_L
+                      {renderSvgMathText('R_L')}
                     </text>
                     <text x="312" y="128" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
@@ -258,8 +264,8 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                 {/* Right: Simplified Thévenin Equivalent Circuit + Load R_L */}
                 <div className="circuit-grid border border-slate-200 rounded-lg p-4">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
-                    <span>b) Equivalente de Thévenin + Carga R_L</span>
-                    <span className="font-mono text-sky-700 tabular-nums">I_L = {iLoad.toFixed(2)} A</span>
+                    <span>b) Equivalente de Thévenin + Carga R<sub>L</sub></span>
+                    <span className="font-mono text-sky-700 tabular-nums">I<sub>L</sub> = {iLoad.toFixed(2)} A</span>
                   </div>
                   <svg viewBox="0 0 410 215" className="w-full h-auto">
                     {/* Dashed box representing Thévenin Equivalent */}
@@ -275,7 +281,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                       strokeDasharray="5 4"
                     />
                     <text x="32" y="36" className="text-[10px] font-sans font-semibold fill-sky-800">
-                      Equivalente de Thévenin (V_Th, R_Th)
+                      {renderSvgMathText('Equivalente de Thévenin (V_Th, R_Th)')}
                     </text>
 
                     {/* Single Loop Wires */}
@@ -307,7 +313,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     <text x="68" y="113" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
                     <text x="68" y="130" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">−</text>
                     <text x="85" y="160" textAnchor="middle" className="text-[11px] font-mono font-bold fill-sky-800">
-                      V_Th = {vTh.toFixed(1)} V
+                      {renderSvgMathText(`V_Th = ${vTh.toFixed(1)} V`)}
                     </text>
 
                     {/* R_Th Series Resistor */}
@@ -319,7 +325,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                       strokeWidth="2"
                     />
                     <text x="147" y="88" textAnchor="middle" className="text-[11px] font-mono font-bold fill-emerald-800">
-                      R_Th = {rTh.toFixed(2)} Ω
+                      {renderSvgMathText(`R_Th = ${rTh.toFixed(2)} Ω`)}
                     </text>
 
                     {/* Terminals a and b */}
@@ -331,13 +337,13 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     {/* Load Resistor R_L */}
                     <rect x="292" y="90" width="32" height="55" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <text x="308" y="114" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
-                      R_L
+                      {renderSvgMathText('R_L')}
                     </text>
                     <text x="308" y="128" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
                     </text>
                     <text x="332" y="112" className="text-[11px] font-mono font-bold fill-sky-700">
-                      V_ab
+                      {renderSvgMathText('V_ab')}
                     </text>
                     <text x="332" y="128" className="text-[11px] font-mono font-bold fill-sky-700">
                       {vAb.toFixed(1)} V
@@ -395,7 +401,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     <>
                       <line x1="80" y1="95" x2="80" y2="145" stroke="#dc2626" strokeWidth="4" />
                       <text x="45" y="124" textAnchor="end" className="text-[11px] font-mono font-bold fill-red-600">
-                        V_s=0V (Corto)
+                        {renderSvgMathText('V_s=0V (Corto)')}
                       </text>
                     </>
                   )}
@@ -407,7 +413,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                       <line x1="355" y1="134" x2="355" y2="108" stroke="#d97706" strokeWidth="2.5" />
                       <polygon points="355,102 350,110 360,110" fill="#d97706" />
                       <text x="355" y="164" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-700">
-                        I_s = {iSource} A
+                        {renderSvgMathText(`I_s = ${iSource} A`)}
                       </text>
                     </>
                   ) : (
@@ -415,7 +421,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                       <circle cx="355" cy="95" r="4" fill="#fff" stroke="#d97706" strokeWidth="2" />
                       <circle cx="355" cy="145" r="4" fill="#fff" stroke="#d97706" strokeWidth="2" />
                       <text x="355" y="124" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-700">
-                        I_s=0A (Abierto)
+                        {renderSvgMathText('I_s=0A (Abierto)')}
                       </text>
                     </>
                   )}
@@ -430,7 +436,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                     <>
                       <text x="515" y="70" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
                       <text x="515" y="116" className="text-[13px] font-mono font-bold fill-sky-700">
-                        V_oc = V_Th
+                        {renderSvgMathText('V_oc = V_Th')}
                       </text>
                       <text x="515" y="134" className="text-[14px] font-mono font-bold fill-slate-900">
                         {vTh.toFixed(2)} V
@@ -442,7 +448,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                       <line x1="550" y1="118" x2="508" y2="118" stroke="#059669" strokeWidth="2.5" />
                       <polygon points="502,118 511,113 511,123" fill="#059669" />
                       <text x="520" y="102" className="text-[12px] font-mono font-bold fill-emerald-700">
-                        R_eq = R_Th
+                        {renderSvgMathText('R_eq = R_Th')}
                       </text>
                       <text x="520" y="140" className="text-[14px] font-mono font-bold fill-slate-900">
                         {rTh.toFixed(2)} Ω
@@ -457,10 +463,10 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
             <div className="mt-6">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-display font-bold text-slate-900 text-sm">
-                  Tabla de Respuesta ante Cargas Variables: I_L = V_Th / (R_Th + R_L)
+                  Tabla de Respuesta ante Cargas Variables: I<sub>L</sub> = V<sub>Th</sub> / (R<sub>Th</sub> + R<sub>L</sub>)
                 </h4>
                 <span className="text-xs font-mono text-slate-500 tabular-nums">
-                  V_Th = {vTh.toFixed(2)} V · R_Th = {rTh.toFixed(2)} Ω
+                  V<sub>Th</sub> = {vTh.toFixed(2)} V · R<sub>Th</sub> = {rTh.toFixed(2)} Ω
                 </span>
               </div>
 
@@ -468,11 +474,11 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                 <table className="w-full text-left border-collapse text-xs font-mono tabular-nums">
                   <thead>
                     <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-sans">
-                      <th className="py-2.5 px-3 font-semibold">Carga Conectada (R_L)</th>
-                      <th className="py-2.5 px-3 font-semibold">Resistencia Total (R_Th + R_L)</th>
-                      <th className="py-2.5 px-3 font-semibold">Corriente en la Carga (I_L)</th>
-                      <th className="py-2.5 px-3 font-semibold">Voltaje Terminal (V_ab)</th>
-                      <th className="py-2.5 px-3 font-semibold">Potencia en Carga (P_L)</th>
+                      <th className="py-2.5 px-3 font-semibold">Carga Conectada (R<sub>L</sub>)</th>
+                      <th className="py-2.5 px-3 font-semibold">Resistencia Total (R<sub>Th</sub> + R<sub>L</sub>)</th>
+                      <th className="py-2.5 px-3 font-semibold">Corriente en la Carga (I<sub>L</sub>)</th>
+                      <th className="py-2.5 px-3 font-semibold">Voltaje Terminal (V<sub>ab</sub>)</th>
+                      <th className="py-2.5 px-3 font-semibold">Potencia en Carga (P<sub>L</sub>)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200">
@@ -487,9 +493,8 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
                           <tr
                             key={loadVal}
                             onClick={() => setRLoad(loadVal)}
-                            className={`cursor-pointer transition-colors ${
-                              isSelected ? 'bg-emerald-50/80 font-bold text-slate-900' : 'hover:bg-slate-50 text-slate-700'
-                            }`}
+                            className={`cursor-pointer transition-colors ${isSelected ? 'bg-emerald-50/80 font-bold text-slate-900' : 'hover:bg-slate-50 text-slate-700'
+                              }`}
                           >
                             <td className="py-2.5 px-3 text-emerald-700 font-semibold">
                               {loadVal.toFixed(1)} Ω {isSelected ? ' (Activa)' : ''}
@@ -515,7 +520,7 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
               <div className="flex items-center gap-2">
                 <Sliders className="w-4 h-4 text-slate-700" />
                 <h3 className="font-display font-bold text-slate-900 text-sm">
-                  Parámetros de la Red y Carga R_L
+                  Parámetros de la Red y Carga R<sub>L</sub>
                 </h3>
               </div>
               <button
@@ -620,34 +625,34 @@ export const TheveninModule: React.FC<TheveninModuleProps> = ({ isPresentationMo
             <div className="space-y-2.5 text-xs font-mono tabular-nums">
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
                 <div className="font-sans font-semibold text-emerald-800">
-                  1. Resistencia de Thévenin (R_Th):
+                  1. Resistencia de Thévenin (R<sub>Th</sub>):
                 </div>
                 <div className="text-slate-700">
-                  R_Th = (R₁ ∥ R₂) + R₃
+                  R<sub>Th</sub> = (R₁ ∥ R₂) + R₃
                 </div>
                 <div className="text-emerald-700 font-bold">
-                  R_Th = ({safeR1}·{safeR2})/({safeR1}+{safeR2}) + {safeR3} = {rTh.toFixed(2)} Ω
+                  R<sub>Th</sub> = ({safeR1}·{safeR2})/({safeR1}+{safeR2}) + {safeR3} = {rTh.toFixed(2)} Ω
                 </div>
               </div>
 
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
                 <div className="font-sans font-semibold text-sky-800">
-                  2. Tensión de Thévenin (V_Th = V_oc):
+                  2. Tensión de Thévenin (V<sub>Th</sub> = V<sub>oc</sub>):
                 </div>
                 <div className="text-slate-700">
-                  V_Th = V_s·[R₂/(R₁+R₂)] + I_s·(R₁ ∥ R₂)
+                  V<sub>Th</sub> = V<sub>s</sub>·[R₂/(R₁+R₂)] + I<sub>s</sub>·(R₁ ∥ R₂)
                 </div>
                 <div className="text-sky-700 font-bold">
-                  V_Th = {vThFromV.toFixed(2)} V + {vThFromI.toFixed(2)} V = {vTh.toFixed(2)} V
+                  V<sub>Th</sub> = {vThFromV.toFixed(2)} V + {vThFromI.toFixed(2)} V = {vTh.toFixed(2)} V
                 </div>
               </div>
 
               <div className="p-3 bg-sky-50/70 rounded-lg border border-sky-200 space-y-1">
                 <div className="font-sans font-semibold text-slate-900">
-                  3. Corriente en la Carga R_L = {safeRL} Ω:
+                  3. Corriente en la Carga R<sub>L</sub> = {safeRL} Ω:
                 </div>
                 <div className="text-sky-800 font-bold text-sm">
-                  I_L = V_Th / (R_Th + R_L) = {vTh.toFixed(2)} / ({rTh.toFixed(2)} + {safeRL}) = {iLoad.toFixed(3)} A
+                  I<sub>L</sub> = V<sub>Th</sub> / (R<sub>Th</sub> + R<sub>L</sub>) = {vTh.toFixed(2)} / ({rTh.toFixed(2)} + {safeRL}) = {iLoad.toFixed(3)} A
                 </div>
               </div>
             </div>

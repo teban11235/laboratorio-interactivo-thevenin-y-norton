@@ -88,11 +88,10 @@ export default function App() {
                   key={mod.id}
                   type="button"
                   onClick={() => setActiveModule(mod.id)}
-                  className={`py-1 transition-colors whitespace-nowrap shrink-0 cursor-pointer border-b-2 ${
-                    isActive
+                  className={`py-1 transition-colors whitespace-nowrap shrink-0 cursor-pointer border-b-2 ${isActive
                       ? 'text-slate-900 font-semibold border-sky-600'
                       : 'text-slate-600 border-transparent hover:text-slate-900 hover:border-slate-300'
-                  }`}
+                    }`}
                 >
                   {mod.shortLabel}
                 </button>
@@ -105,11 +104,10 @@ export default function App() {
             <button
               type="button"
               onClick={() => setIsPresentationMode(!isPresentationMode)}
-              className={`px-3.5 sm:px-4 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                isPresentationMode
+              className={`px-3.5 sm:px-4 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer ${isPresentationMode
                   ? 'bg-sky-600 text-white hover:bg-sky-700'
                   : 'bg-slate-900 text-white hover:bg-slate-800'
-              }`}
+                }`}
             >
               {isPresentationMode ? 'Salir de Modo Presentación' : 'Modo Presentación'}
             </button>
@@ -143,11 +141,10 @@ export default function App() {
                   key={mod.id}
                   type="button"
                   onClick={() => setActiveModule(mod.id)}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${
-                    activeModule === mod.id
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${activeModule === mod.id
                       ? 'bg-slate-900 text-white'
                       : 'bg-slate-100 text-slate-700'
-                  }`}
+                    }`}
                 >
                   {mod.shortLabel}
                 </button>
@@ -203,13 +200,13 @@ export default function App() {
                 3. Teorema de Thévenin
               </div>
               <p className="font-mono text-emerald-700 font-semibold">
-                V_Th = V_oc (Carga desconectada)
+                V<sub>Th</sub> = V<sub>oc</sub> (Carga desconectada)
               </p>
               <p className="font-mono text-emerald-700 font-semibold">
-                I_L = V_Th / (R_Th + R_L)
+                I<sub>L</sub> = V<sub>Th</sub> / (R<sub>Th</sub> + R<sub>L</sub>)
               </p>
               <p className="text-slate-600 pt-1">
-                Reemplaza la red por una fuente de tensión en serie con <span className="font-mono">R_Th</span>.
+                Reemplaza la red por una fuente de tensión en serie con <span className="font-mono">R<sub>Th</sub></span>.
               </p>
             </div>
 
@@ -218,13 +215,13 @@ export default function App() {
                 4. Norton y Conversión
               </div>
               <p className="font-mono text-amber-700 font-semibold">
-                I_N = I_corto = V_Th / R_Th
+                I<sub>N</sub> = I<sub>corto</sub> = V<sub>Th</sub> / R<sub>Th</sub>
               </p>
               <p className="font-mono text-amber-700 font-semibold">
-                V_Th = I_N · R_N · (R_N = R_Th)
+                V<sub>Th</sub> = I<sub>N</sub> · R<sub>N</sub> · (R<sub>N</sub> = R<sub>Th</sub>)
               </p>
               <p className="text-slate-600 pt-1">
-                Verificación en bornes: <span className="font-mono">V_ab = I_N · (R_N ∥ R_L)</span>.
+                Verificación en bornes: <span className="font-mono">V<sub>ab</sub> = I<sub>N</sub> · (R<sub>N</sub> ∥ R<sub>L</sub>)</span>.
               </p>
             </div>
           </div>

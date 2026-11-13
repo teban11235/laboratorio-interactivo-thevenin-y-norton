@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ParameterControl } from './ParameterControl';
+import { renderSvgMathText } from '../utils/mathFormat';
 import { ArrowLeftRight, CheckCircle2, RotateCcw, Sliders } from 'lucide-react';
 
 interface NortonModuleProps {
@@ -52,15 +53,15 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
           <div className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-1">
             <span>Equivalente en Paralelo y Transformación de Fuentes</span>
             <span aria-hidden="true">·</span>
-            <span>I_N = I_corto y R_N = R_Th</span>
+            <span>I<sub>N</sub> = I<sub>corto</sub> y R<sub>N</sub> = R<sub>Th</sub></span>
           </div>
           <h2 className={`font-display font-bold text-slate-900 ${isPresentationMode ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl'}`}>
             Teorema de Norton y Relación Thévenin ↔ Norton
           </h2>
           <p className={`text-slate-600 mt-1 w-full ${isPresentationMode ? 'text-base sm:text-lg' : 'text-sm'}`}>
             Cualquier circuito lineal de dos terminales puede reemplazarse por una fuente de corriente{' '}
-            <span className="font-mono font-semibold text-amber-700">I_N = I_corto</span> en paralelo con una resistencia{' '}
-            <span className="font-mono font-semibold text-emerald-700">R_N = R_Th</span>, siendo directamente interconvertible con el modelo de Thévenin.
+            <span className="font-mono font-semibold text-amber-700">I<sub>N</sub> = I<sub>corto</sub></span> en paralelo con una resistencia{' '}
+            <span className="font-mono font-semibold text-emerald-700">R<sub>N</sub> = R<sub>Th</sub></span>, siendo directamente interconvertible con el modelo de Thévenin.
           </p>
         </div>
 
@@ -69,21 +70,21 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
             type="button"
             onClick={() => setView('shortCircuit')}
             className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${view === 'shortCircuit'
-                ? 'bg-white text-amber-700 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-white text-amber-700 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
               }`}
           >
-            1. Corriente de Cortocircuito (I_N) y R_N
+            1. Corriente de Cortocircuito (I<sub>N</sub>) y R<sub>N</sub>
           </button>
           <button
             type="button"
             onClick={() => setView('transformation')}
             className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${view === 'transformation'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
               }`}
           >
-            2. Conversión Thévenin ↔ Norton con Carga R_L
+            2. Conversión Thévenin ↔ Norton con Carga R<sub>L</sub>
           </button>
         </div>
       </div>
@@ -96,18 +97,22 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
               <div>
                 <h3 className={`font-display font-bold text-slate-900 ${isPresentationMode ? 'text-xl' : 'text-base'}`}>
-                  {view === 'shortCircuit'
-                    ? 'Determinación de Parámetros: Cortocircuito entre a–b (I_N = I_corto) y Equivalente de Norton'
-                    : 'Equivalencia Terminal: Fuente de Tensión en Serie (Thévenin) ↔ Fuente de Corriente en Paralelo (Norton)'}
+                  {view === 'shortCircuit' ? (
+                    <>Determinación de Parámetros: Cortocircuito entre a–b (I<sub>N</sub> = I<sub>corto</sub>) y Equivalente de Norton</>
+                  ) : (
+                    <>Equivalencia Terminal: Fuente de Tensión en Serie (Thévenin) ↔ Fuente de Corriente en Paralelo (Norton)</>
+                  )}
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  {view === 'shortCircuit'
-                    ? 'La corriente de Norton I_N es la corriente que circula al conectar directamente los terminales a y b mediante un cortocircuito.'
-                    : 'Modifica V_Th, I_N, R_Th = R_N o R_L en el panel derecho para verificar que V_ab e I_L son idénticos en ambos modelos.'}
+                  {view === 'shortCircuit' ? (
+                    <>La corriente de Norton I<sub>N</sub> es la corriente que circula al conectar directamente los terminales a y b mediante un cortocircuito.</>
+                  ) : (
+                    <>Modifica V<sub>Th</sub>, I<sub>N</sub>, R<sub>Th</sub> = R<sub>N</sub> o R<sub>L</sub> en el panel derecho para verificar que V<sub>ab</sub> e I<sub>L</sub> son idénticos en ambos modelos.</>
+                  )}
                 </p>
               </div>
               <span className="text-xs font-mono font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-md tabular-nums">
-                I_N = V_Th / R_Th = {iNorton.toFixed(2)} A
+                I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub> = {iNorton.toFixed(2)} A
               </span>
             </div>
 
@@ -117,7 +122,9 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                 <div className="circuit-grid border border-slate-200 rounded-lg p-4">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
                     <span>a) Medición de Corriente de Cortocircuito</span>
-                    <span className="font-mono text-amber-700 tabular-nums">I_N = I_corto = {iNorton.toFixed(2)} A</span>
+                    <span className="font-mono text-amber-700 tabular-nums">
+                      I<sub>N</sub> = I<sub>corto</sub> = {iNorton.toFixed(2)} A
+                    </span>
                   </div>
                   <svg viewBox="0 0 385 205" className="w-full h-auto">
                     {/* Two-terminal linear network box */}
@@ -138,7 +145,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                       dos terminales
                     </text>
                     <text x="112" y="128" textAnchor="middle" className="text-[11px] font-mono fill-slate-600">
-                      (V_oc = {vTh.toFixed(1)} V, R_eq = {safeR.toFixed(1)} Ω)
+                      {renderSvgMathText(`(V_oc = ${vTh.toFixed(1)} V, R_eq = ${safeR.toFixed(1)} Ω)`)}
                     </text>
 
                     {/* Terminal wires to a and b */}
@@ -158,7 +165,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     {/* Arrow on short-circuit branch */}
                     <polygon points="255,112 249,100 261,100" fill="#b45309" />
                     <text x="270" y="98" className="text-[12px] font-mono font-bold fill-amber-800">
-                      I_corto = I_N
+                      {renderSvgMathText('I_corto = I_N')}
                     </text>
                     <text x="270" y="116" className="text-[13px] font-mono font-bold fill-slate-900">
                       {iNorton.toFixed(2)} A
@@ -176,7 +183,9 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                 <div className="circuit-grid border border-slate-200 rounded-lg p-4">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
                     <span>b) Circuito Equivalente de Norton</span>
-                    <span className="font-mono text-emerald-700 tabular-nums">R_N = R_Th = {safeR.toFixed(1)} Ω</span>
+                    <span className="font-mono text-emerald-700 tabular-nums">
+                      R<sub>N</sub> = R<sub>Th</sub> = {safeR.toFixed(1)} Ω
+                    </span>
                   </div>
                   <svg viewBox="0 0 385 205" className="w-full h-auto">
                     {/* Parallel Wires */}
@@ -190,7 +199,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     <line x1="75" y1="116" x2="75" y2="92" stroke="#d97706" strokeWidth="2.5" />
                     <polygon points="75,85 70,94 80,94" fill="#d97706" />
                     <text x="75" y="172" textAnchor="middle" className="text-[12px] font-mono font-bold fill-amber-800">
-                      I_N = {iNorton.toFixed(2)} A
+                      {renderSvgMathText(`I_N = ${iNorton.toFixed(2)} A`)}
                     </text>
 
                     {/* Parallel Resistor R_N Branch */}
@@ -204,10 +213,10 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                       strokeWidth="2"
                     />
                     <text x="198" y="100" className="text-[12px] font-mono font-bold fill-emerald-800">
-                      R_N = {safeR.toFixed(1)} Ω
+                      {renderSvgMathText(`R_N = ${safeR.toFixed(1)} Ω`)}
                     </text>
                     <text x="198" y="116" className="text-[11px] font-mono fill-slate-500">
-                      (R_N = R_Th)
+                      {renderSvgMathText('(R_N = R_Th)')}
                     </text>
 
                     {/* Terminals a and b */}
@@ -226,7 +235,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
                     <span>Equivalente de Thévenin (Serie)</span>
                     <span className="font-mono text-sky-700 tabular-nums">
-                      V_ab = {vAbThevenin.toFixed(2)} V · I_L = {iLoadThevenin.toFixed(2)} A
+                      V<sub>ab</sub> = {vAbThevenin.toFixed(2)} V · I<sub>L</sub> = {iLoadThevenin.toFixed(2)} A
                     </span>
                   </div>
                   <svg viewBox="0 0 385 205" className="w-full h-auto">
@@ -256,13 +265,13 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     <text x="80" y="100" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
                     <text x="80" y="117" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">−</text>
                     <text x="115" y="184" textAnchor="middle" className="text-[11px] font-mono font-bold fill-sky-800">
-                      V_Th = I_N·R_N = {vTh.toFixed(2)} V
+                      {renderSvgMathText(`V_Th = I_N·R_N = ${vTh.toFixed(2)} V`)}
                     </text>
 
                     {/* R_Th */}
                     <rect x="125" y="37" width="65" height="26" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.2" />
                     <text x="157" y="54" textAnchor="middle" className="text-[11px] font-mono font-bold fill-emerald-800">
-                      R_Th={safeR}Ω
+                      {renderSvgMathText(`R_Th=${safeR}Ω`)}
                     </text>
 
                     {/* Terminals a and b */}
@@ -274,7 +283,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     {/* Load R_L */}
                     <rect x="299" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <text x="315" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
-                      R_L
+                      {renderSvgMathText('R_L')}
                     </text>
                     <text x="315" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
@@ -287,7 +296,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-2">
                     <span>Equivalente de Norton (Paralelo)</span>
                     <span className="font-mono text-amber-700 tabular-nums">
-                      V_ab = {vAbNorton.toFixed(2)} V · I_L = {iLoadNorton.toFixed(2)} A
+                      V<sub>ab</sub> = {vAbNorton.toFixed(2)} V · I<sub>L</sub> = {iLoadNorton.toFixed(2)} A
                     </span>
                   </div>
                   <svg viewBox="0 0 385 205" className="w-full h-auto">
@@ -319,13 +328,13 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     <line x1="80" y1="118" x2="80" y2="94" stroke="#d97706" strokeWidth="2.5" />
                     <polygon points="80,87 75,96 85,96" fill="#d97706" />
                     <text x="115" y="184" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-800">
-                      I_N = V_Th/R_Th = {iNorton.toFixed(2)} A
+                      {renderSvgMathText(`I_N = V_Th/R_Th = ${iNorton.toFixed(2)} A`)}
                     </text>
 
                     {/* R_N */}
                     <rect x="149" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.2" />
                     <text x="165" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
-                      R_N
+                      {renderSvgMathText('R_N')}
                     </text>
                     <text x="165" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeR}Ω
@@ -340,7 +349,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                     {/* Load R_L */}
                     <rect x="299" y="78" width="32" height="54" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                     <text x="315" y="102" textAnchor="middle" className="text-[10px] font-mono font-bold fill-emerald-800">
-                      R_L
+                      {renderSvgMathText('R_L')}
                     </text>
                     <text x="315" y="116" textAnchor="middle" className="text-[10px] font-mono font-semibold fill-emerald-700">
                       {safeRL}Ω
@@ -357,7 +366,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   De Thévenin a Norton
                 </div>
                 <div className="text-base font-bold text-amber-700">
-                  I_N = V_Th / R_Th = {iNorton.toFixed(2)} A
+                  I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub> = {iNorton.toFixed(2)} A
                 </div>
                 <div className="text-slate-600 mt-1">
                   ({vTh.toFixed(2)} V) / ({safeR.toFixed(2)} Ω)
@@ -369,7 +378,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   De Norton a Thévenin
                 </div>
                 <div className="text-base font-bold text-sky-700">
-                  V_Th = I_N · R_N = {vTh.toFixed(2)} V
+                  V<sub>Th</sub> = I<sub>N</sub> · R<sub>N</sub> = {vTh.toFixed(2)} V
                 </div>
                 <div className="text-slate-600 mt-1">
                   ({iNorton.toFixed(2)} A) · ({safeR.toFixed(2)} Ω)
@@ -381,7 +390,7 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   Igualdad de Resistencias
                 </div>
                 <div className="text-base font-bold text-emerald-700">
-                  R_N = R_Th = {safeR.toFixed(2)} Ω
+                  R<sub>N</sub> = R<sub>Th</sub> = {safeR.toFixed(2)} Ω
                 </div>
                 <div className="text-slate-600 mt-1">
                   Vista desde a–b con fuentes apagadas
@@ -489,10 +498,10 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   Usando el Equivalente de Thévenin:
                 </div>
                 <div className="text-slate-700">
-                  I_L = V_Th / (R_Th + R_L) = {vTh.toFixed(2)} / ({safeR.toFixed(2)} + {safeRL.toFixed(2)})
+                  I<sub>L</sub> = V<sub>Th</sub> / (R<sub>Th</sub> + R<sub>L</sub>) = {vTh.toFixed(2)} / ({safeR.toFixed(2)} + {safeRL.toFixed(2)})
                 </div>
                 <div className="text-sky-700 font-bold">
-                  I_L = {iLoadThevenin.toFixed(3)} A · V_ab = {vAbThevenin.toFixed(2)} V
+                  I<sub>L</sub> = {iLoadThevenin.toFixed(3)} A · V<sub>ab</sub> = {vAbThevenin.toFixed(2)} V
                 </div>
               </div>
 
@@ -501,13 +510,13 @@ export const NortonModule: React.FC<NortonModuleProps> = ({ isPresentationMode }
                   Usando el Equivalente de Norton:
                 </div>
                 <div className="text-slate-700">
-                  V_ab = I_N · (R_N ∥ R_L) = {iNorton.toFixed(2)} · ({rParallel.toFixed(2)} Ω)
+                  V<sub>ab</sub> = I<sub>N</sub> · (R<sub>N</sub> ∥ R<sub>L</sub>) = {iNorton.toFixed(2)} · ({rParallel.toFixed(2)} Ω)
                 </div>
                 <div className="text-amber-700 font-bold">
-                  I_L = {iLoadNorton.toFixed(3)} A · V_ab = {vAbNorton.toFixed(2)} V
+                  I<sub>L</sub> = {iLoadNorton.toFixed(3)} A · V<sub>ab</sub> = {vAbNorton.toFixed(2)} V
                 </div>
                 <div className="text-slate-500 text-[11px] pt-0.5">
-                  Corriente derivada por R_N: {iShuntNorton.toFixed(3)} A
+                  Corriente derivada por R<sub>N</sub>: {iShuntNorton.toFixed(3)} A
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ParameterControl } from './ParameterControl';
+import { renderSvgMathText } from '../utils/mathFormat';
 import { Power, RotateCcw, Sliders, Zap } from 'lucide-react';
 
 interface SuperpositionModuleProps {
@@ -84,33 +85,30 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
           <button
             type="button"
             onClick={() => setSourceMode('both')}
-            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              sourceMode === 'both'
+            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${sourceMode === 'both'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             1. Circuito Completo (V + I)
           </button>
           <button
             type="button"
             onClick={() => setSourceMode('onlyV')}
-            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              sourceMode === 'onlyV'
+            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${sourceMode === 'onlyV'
                 ? 'bg-white text-sky-700 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             2. Solo Fuente V (I → Abierto)
           </button>
           <button
             type="button"
             onClick={() => setSourceMode('onlyI')}
-            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              sourceMode === 'onlyI'
+            className={`px-3 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${sourceMode === 'onlyI'
                 ? 'bg-white text-amber-700 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             3. Solo Fuente I (V → Cortocircuito)
           </button>
@@ -134,7 +132,15 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
               </div>
               <div className="flex items-center gap-2 text-xs font-mono">
                 <span className="px-2.5 py-1 bg-slate-100 rounded-md text-slate-800 font-semibold tabular-nums">
-                  Lectura actual en R_o: v_o = {displayedVo.toFixed(2)} V
+                  Lectura actual en R<sub>o</sub>:{' '}
+                  {sourceMode === 'both' ? (
+                    <>v<sub>o</sub></>
+                  ) : sourceMode === 'onlyV' ? (
+                    <>v<sub>o</sub><sup>(V)</sup></>
+                  ) : (
+                    <>v<sub>o</sub><sup>(I)</sup></>
+                  )}{' '}
+                  = {displayedVo.toFixed(2)} V
                 </span>
               </div>
             </div>
@@ -229,23 +235,25 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
                   +
                 </text>
                 <text x="504" y="148" textAnchor="end" className="text-[13px] font-mono font-bold fill-emerald-800">
-                  {sourceMode === 'both'
-                    ? 'v_o'
-                    : sourceMode === 'onlyV'
-                    ? 'v_o^(V)'
-                    : 'v_o^(I)'}
+                  {renderSvgMathText(
+                    sourceMode === 'both'
+                      ? 'v_o'
+                      : sourceMode === 'onlyV'
+                        ? 'v_o^(V)'
+                        : 'v_o^(I)'
+                  )}
                 </text>
                 <text x="504" y="174" textAnchor="end" className="text-[14px] font-mono font-bold fill-emerald-700">
                   −
                 </text>
                 <text x="562" y="136" className="text-[12px] font-mono font-semibold fill-emerald-800">
-                  R_o = {safeRo.toFixed(1)} Ω
+                  {renderSvgMathText(`R_o = ${safeRo.toFixed(1)} Ω`)}
                 </text>
                 <text x="562" y="155" className="text-[13px] font-mono font-bold fill-slate-900">
                   {displayedVo.toFixed(2)} V
                 </text>
                 <text x="562" y="172" className="text-[11px] font-mono fill-slate-600">
-                  i_o = {displayedIo.toFixed(2)} A
+                  {renderSvgMathText(`i_o = ${displayedIo.toFixed(2)} A`)}
                 </text>
 
                 {/* SOURCE 1: VOLTAGE SOURCE V_s (Active vs Short Circuit 0 V) */}
@@ -263,7 +271,7 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
                         −
                       </text>
                       <text x="45" y="138" textAnchor="end" className="text-[12px] font-mono font-bold fill-sky-700">
-                        V_s
+                        {renderSvgMathText('V_s')}
                       </text>
                       <text x="45" y="154" textAnchor="end" className="text-[12px] font-mono font-semibold fill-slate-800">
                         {vSource.toFixed(1)} V
@@ -277,7 +285,7 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
                       <circle cx="85" cy="112" r="4" fill="#dc2626" />
                       <circle cx="85" cy="172" r="4" fill="#dc2626" />
                       <text x="85" y="192" textAnchor="middle" className="text-[11px] font-mono font-bold fill-red-700">
-                        V_s = 0 V (Cortocircuito)
+                        {renderSvgMathText('V_s = 0 V (Cortocircuito)')}
                       </text>
                     </>
                   )}
@@ -294,7 +302,7 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
                       <line x1="310" y1="158" x2="310" y2="130" stroke="#d97706" strokeWidth="2.5" />
                       <polygon points="310,122 304,132 316,132" fill="#d97706" />
                       <text x="270" y="138" textAnchor="end" className="text-[12px] font-mono font-bold fill-amber-700">
-                        I_s
+                        {renderSvgMathText('I_s')}
                       </text>
                       <text x="270" y="154" textAnchor="end" className="text-[12px] font-mono font-semibold fill-slate-800">
                         {iSource.toFixed(1)} A
@@ -307,7 +315,7 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
                       <circle cx="310" cy="116" r="4.5" fill="#ffffff" stroke="#d97706" strokeWidth="2.5" />
                       <circle cx="310" cy="168" r="4.5" fill="#ffffff" stroke="#d97706" strokeWidth="2.5" />
                       <text x="310" y="192" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-800">
-                        I_s = 0 A (Circuito Abierto)
+                        {renderSvgMathText('I_s = 0 A (Circuito Abierto)')}
                       </text>
                     </>
                   )}
@@ -320,63 +328,62 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
               <button
                 type="button"
                 onClick={() => setSourceMode('onlyV')}
-                className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
-                  sourceMode === 'onlyV'
+                className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${sourceMode === 'onlyV'
                     ? 'bg-sky-50/70 border-sky-500 ring-1 ring-sky-500'
                     : 'bg-slate-50 border-slate-200 hover:border-slate-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
                   <span>Aporte de Fuente de Tensión</span>
-                  <span className="font-mono font-semibold text-sky-700">I_s = 0 A (Abierto)</span>
+                  <span className="font-mono font-semibold text-sky-700">I<sub>s</sub> = 0 A (Abierto)</span>
                 </div>
                 <div className="font-mono font-bold text-xl text-sky-700 tabular-nums">
-                  v_o^(V) = {voFromV.toFixed(2)} V
+                  v<sub>o</sub><sup>(V)</sup> = {voFromV.toFixed(2)} V
                 </div>
                 <div className="text-xs font-mono text-slate-600 mt-1 tabular-nums">
-                  i_o^(V) = {iFromV.toFixed(2)} A
+                  i<sub>o</sub><sup>(V)</sup> = {iFromV.toFixed(2)} A
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setSourceMode('onlyI')}
-                className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
-                  sourceMode === 'onlyI'
+                className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${sourceMode === 'onlyI'
                     ? 'bg-amber-50/70 border-amber-500 ring-1 ring-amber-500'
                     : 'bg-slate-50 border-slate-200 hover:border-slate-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
                   <span>Aporte de Fuente de Corriente</span>
-                  <span className="font-mono font-semibold text-amber-700">V_s = 0 V (Corto)</span>
+                  <span className="font-mono font-semibold text-amber-700">V<sub>s</sub> = 0 V (Corto)</span>
                 </div>
                 <div className="font-mono font-bold text-xl text-amber-700 tabular-nums">
-                  v_o^(I) = {voFromI.toFixed(2)} V
+                  v<sub>o</sub><sup>(I)</sup> = {voFromI.toFixed(2)} V
                 </div>
                 <div className="text-xs font-mono text-slate-600 mt-1 tabular-nums">
-                  i_o^(I) = {iFromI.toFixed(2)} A
+                  i<sub>o</sub><sup>(I)</sup> = {iFromI.toFixed(2)} A
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setSourceMode('both')}
-                className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
-                  sourceMode === 'both'
+                className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${sourceMode === 'both'
                     ? 'bg-emerald-50/70 border-emerald-600 ring-1 ring-emerald-600'
                     : 'bg-slate-50 border-slate-200 hover:border-slate-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
                   <span>Suma Algebraica Total</span>
-                  <span className="font-mono font-semibold text-emerald-700">v_o^(V) + v_o^(I)</span>
+                  <span className="font-mono font-semibold text-emerald-700">
+                    v<sub>o</sub><sup>(V)</sup> + v<sub>o</sub><sup>(I)</sup>
+                  </span>
                 </div>
                 <div className="font-mono font-bold text-xl text-emerald-800 tabular-nums">
-                  v_o = {voTotal.toFixed(2)} V
+                  v<sub>o</sub> = {voTotal.toFixed(2)} V
                 </div>
                 <div className="text-xs font-mono text-slate-600 mt-1 tabular-nums">
-                  i_o = {iTotal.toFixed(2)} A
+                  i<sub>o</sub> = {iTotal.toFixed(2)} A
                 </div>
               </button>
             </div>
@@ -418,13 +425,13 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
               </p>
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs font-mono space-y-1 tabular-nums">
                 <div className="flex justify-between text-slate-600">
-                  <span>P_o^(V) + P_o^(I) (Incorrecto):</span>
+                  <span>P<sub>o</sub><sup>(V)</sup> + P<sub>o</sub><sup>(I)</sup> (Incorrecto):</span>
                   <span className="line-through text-red-600 font-semibold">
                     {pFromV.toFixed(2)} + {pFromI.toFixed(2)} = {pWrongSum.toFixed(2)} W
                   </span>
                 </div>
                 <div className="flex justify-between text-slate-900 font-bold">
-                  <span>P_o = v_o² / R_o (Correcto):</span>
+                  <span>P<sub>o</sub> = v<sub>o</sub>² / R<sub>o</sub> (Correcto):</span>
                   <span className="text-emerald-700">{pCorrectTotal.toFixed(2)} W</span>
                 </div>
               </div>
@@ -526,31 +533,31 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
             <div className="space-y-2.5 text-xs font-mono tabular-nums">
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
                 <div className="font-sans font-semibold text-sky-800">
-                  Paso 1: Activar solo V_s ({vSource.toFixed(1)} V), apagar I_s (0 A)
+                  Paso 1: Activar solo V<sub>s</sub> ({vSource.toFixed(1)} V), apagar I<sub>s</sub> (0 A)
                 </div>
                 <div className="text-slate-600 font-sans text-[11px]">
-                  Con I_s en circuito abierto, R₁, R₂ y R_o quedan en serie:
+                  Con I<sub>s</sub> en circuito abierto, R₁, R₂ y R<sub>o</sub> quedan en serie:
                 </div>
                 <div className="text-slate-900 font-semibold pt-1">
-                  v_o^(V) = V_s · [R_o / (R₁ + R₂ + R_o)]
+                  v<sub>o</sub><sup>(V)</sup> = V<sub>s</sub> · [R<sub>o</sub> / (R₁ + R₂ + R<sub>o</sub>)]
                 </div>
                 <div className="text-sky-700 font-bold">
-                  v_o^(V) = {vSource.toFixed(1)} · [{safeRo.toFixed(1)} / {totalLoopR.toFixed(1)}] = {voFromV.toFixed(2)} V
+                  v<sub>o</sub><sup>(V)</sup> = {vSource.toFixed(1)} · [{safeRo.toFixed(1)} / {totalLoopR.toFixed(1)}] = {voFromV.toFixed(2)} V
                 </div>
               </div>
 
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
                 <div className="font-sans font-semibold text-amber-800">
-                  Paso 2: Activar solo I_s ({iSource.toFixed(1)} A), apagar V_s (0 V)
+                  Paso 2: Activar solo I<sub>s</sub> ({iSource.toFixed(1)} A), apagar V<sub>s</sub> (0 V)
                 </div>
                 <div className="text-slate-600 font-sans text-[11px]">
-                  Con V_s en cortocircuito, I_s se divide entre R₁ y (R₂ + R_o):
+                  Con V<sub>s</sub> en cortocircuito, I<sub>s</sub> se divide entre R₁ y (R₂ + R<sub>o</sub>):
                 </div>
                 <div className="text-slate-900 font-semibold pt-1">
-                  i_o^(I) = I_s · [R₁ / (R₁ + R₂ + R_o)] = {iFromI.toFixed(2)} A
+                  i<sub>o</sub><sup>(I)</sup> = I<sub>s</sub> · [R₁ / (R₁ + R₂ + R<sub>o</sub>)] = {iFromI.toFixed(2)} A
                 </div>
                 <div className="text-amber-700 font-bold">
-                  v_o^(I) = i_o^(I) · R_o = ({iFromI.toFixed(2)}) · ({safeRo.toFixed(1)}) = {voFromI.toFixed(2)} V
+                  v<sub>o</sub><sup>(I)</sup> = i<sub>o</sub><sup>(I)</sup> · R<sub>o</sub> = ({iFromI.toFixed(2)}) · ({safeRo.toFixed(1)}) = {voFromI.toFixed(2)} V
                 </div>
               </div>
 
@@ -559,7 +566,7 @@ export const SuperpositionModule: React.FC<SuperpositionModuleProps> = ({ isPres
                   Paso 3: Sumar algebraicamente las contribuciones
                 </div>
                 <div className="text-emerald-800 font-bold text-sm">
-                  v_o = v_o^(I) + v_o^(V) = {voFromI.toFixed(2)} V + ({voFromV.toFixed(2)} V) = {voTotal.toFixed(2)} V
+                  v<sub>o</sub> = v<sub>o</sub><sup>(I)</sup> + v<sub>o</sub><sup>(V)</sup> = {voFromI.toFixed(2)} V + ({voFromV.toFixed(2)} V) = {voTotal.toFixed(2)} V
                 </div>
               </div>
             </div>

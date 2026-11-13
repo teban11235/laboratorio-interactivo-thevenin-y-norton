@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ParameterControl } from './ParameterControl';
+import { renderMathText, renderSvgMathText } from '../utils/mathFormat';
 import { Award, CheckCircle2, Eye, HelpCircle, RefreshCw, XCircle } from 'lucide-react';
 
 interface EvaluationModuleProps {
@@ -198,22 +199,20 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
           <button
             type="button"
             onClick={() => setMode('challenge')}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              mode === 'challenge'
+            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${mode === 'challenge'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             1. Verificador de Ejercicios en Vivo
           </button>
           <button
             type="button"
             onClick={() => setMode('quiz')}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              mode === 'quiz'
+            className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${mode === 'quiz'
                 ? 'bg-white text-sky-700 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             2. Quiz Conceptual ({Object.keys(selectedAnswers).length}/{QUIZ_QUESTIONS.length})
           </button>
@@ -231,7 +230,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                     Circuito Propuesto para Resolver entre los Terminales a–b
                   </h3>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Determina R_Th, V_Th (por superposición), I_N y la corriente en la carga I_L para los valores actuales.
+                    Determina R<sub>Th</sub>, V<sub>Th</sub> (por superposición), I<sub>N</sub> y la corriente en la carga I<sub>L</sub> para los valores actuales.
                   </p>
                 </div>
                 <button
@@ -263,7 +262,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                   <text x="75" y="103" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">+</text>
                   <text x="75" y="120" textAnchor="middle" className="text-[14px] font-mono font-bold fill-sky-700">−</text>
                   <text x="42" y="112" textAnchor="end" className="text-[12px] font-mono font-bold fill-sky-700">
-                    V_s = {vSource} V
+                    {renderSvgMathText(`V_s = ${vSource} V`)}
                   </text>
 
                   {/* R1 */}
@@ -283,7 +282,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                   <line x1="350" y1="120" x2="350" y2="96" stroke="#d97706" strokeWidth="2.5" />
                   <polygon points="350,90 345,98 355,98" fill="#d97706" />
                   <text x="350" y="150" textAnchor="middle" className="text-[11px] font-mono font-bold fill-amber-700">
-                    I_s = {iSource} A
+                    {renderSvgMathText(`I_s = ${iSource} A`)}
                   </text>
 
                   {/* Terminals a and b */}
@@ -302,10 +301,10 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                   />
                   <rect x="474" y="80" width="32" height="55" rx="4" fill="#ecfdf5" stroke="#059669" strokeWidth="2.5" />
                   <text x="516" y="104" className="text-[12px] font-mono font-bold fill-emerald-800">
-                    R_L = {safeRL} Ω
+                    {renderSvgMathText(`R_L = ${safeRL} Ω`)}
                   </text>
                   <text x="516" y="122" className="text-[11px] font-mono fill-slate-600">
-                    Hallar I_L
+                    {renderSvgMathText('Hallar I_L')}
                   </text>
                 </svg>
               </div>
@@ -314,7 +313,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    1. R_Th = R_N (Ω)
+                    1. R<sub>Th</sub> = R<sub>N</sub> (Ω)
                   </label>
                   <div className="flex items-center gap-1.5">
                     <input
@@ -337,7 +336,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
 
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    2. V_Th = V_oc (V)
+                    2. V<sub>Th</sub> = V<sub>oc</sub> (V)
                   </label>
                   <div className="flex items-center gap-1.5">
                     <input
@@ -360,7 +359,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
 
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    3. I_N = I_corto (A)
+                    3. I<sub>N</sub> = I<sub>corto</sub> (A)
                   </label>
                   <div className="flex items-center gap-1.5">
                     <input
@@ -383,7 +382,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
 
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    4. Corriente I_L (A)
+                    4. Corriente I<sub>L</sub> (A)
                   </label>
                   <div className="flex items-center gap-1.5">
                     <input
@@ -430,22 +429,22 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                   </div>
                   <div>
                     <span className="text-emerald-700 font-bold">1. Resistencia de Thévenin y Norton:</span>{' '}
-                    Apagando V_s (cortocircuito) e I_s (circuito abierto), R₁ y R₂ quedan en paralelo:{' '}
-                    R_Th = R_N = ({safeR1} · {safeR2}) / ({safeR1} + {safeR2}) = <strong>{exactRTh.toFixed(2)} Ω</strong>
+                    Apagando V<sub>s</sub> (cortocircuito) e I<sub>s</sub> (circuito abierto), R₁ y R₂ quedan en paralelo:{' '}
+                    R<sub>Th</sub> = R<sub>N</sub> = ({safeR1} · {safeR2}) / ({safeR1} + {safeR2}) = <strong>{exactRTh.toFixed(2)} Ω</strong>
                   </div>
                   <div>
                     <span className="text-sky-700 font-bold">2. Voltaje de Thévenin por Superposición:</span>{' '}
-                    V_Th^(V) = {vSource} · [{safeR2}/({safeR1}+{safeR2})] = {exactVThFromV.toFixed(2)} V;{' '}
-                    V_Th^(I) = {iSource} · ({exactRTh.toFixed(2)}) = {exactVThFromI.toFixed(2)} V ⇒{' '}
-                    V_Th = <strong>{exactVTh.toFixed(2)} V</strong>
+                    V<sub>Th</sub><sup>(V)</sup> = {vSource} · [{safeR2}/({safeR1}+{safeR2})] = {exactVThFromV.toFixed(2)} V;{' '}
+                    V<sub>Th</sub><sup>(I)</sup> = {iSource} · ({exactRTh.toFixed(2)}) = {exactVThFromI.toFixed(2)} V ⇒{' '}
+                    V<sub>Th</sub> = <strong>{exactVTh.toFixed(2)} V</strong>
                   </div>
                   <div>
                     <span className="text-amber-700 font-bold">3. Corriente de Norton:</span>{' '}
-                    I_N = V_Th / R_Th = {exactVTh.toFixed(2)} / {exactRTh.toFixed(2)} = <strong>{exactIN.toFixed(2)} A</strong>
+                    I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub> = {exactVTh.toFixed(2)} / {exactRTh.toFixed(2)} = <strong>{exactIN.toFixed(2)} A</strong>
                   </div>
                   <div>
-                    <span className="text-slate-900 font-bold">4. Corriente en la carga R_L ({safeRL} Ω):</span>{' '}
-                    I_L = V_Th / (R_Th + R_L) = {exactVTh.toFixed(2)} / ({exactRTh.toFixed(2)} + {safeRL}) ={' '}
+                    <span className="text-slate-900 font-bold">4. Corriente en la carga R<sub>L</sub> ({safeRL} Ω):</span>{' '}
+                    I<sub>L</sub> = V<sub>Th</sub> / (R<sub>Th</sub> + R<sub>L</sub>) = {exactVTh.toFixed(2)} / ({exactRTh.toFixed(2)} + {safeRL}) ={' '}
                     <strong>{exactIL.toFixed(3)} A</strong>
                   </div>
                 </div>
@@ -582,7 +581,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                       <span className="font-mono">Pregunta {q.id}</span>
                     </div>
                     <h4 className={`font-display font-bold text-slate-900 ${isPresentationMode ? 'text-lg' : 'text-sm'}`}>
-                      {q.question}
+                      {renderMathText(q.question)}
                     </h4>
 
                     <div className="space-y-2 pt-1">
@@ -611,7 +610,7 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
                             }
                             className={`w-full text-left p-3 rounded-lg border text-xs transition-colors flex items-start justify-between gap-2 cursor-pointer ${btnStyle}`}
                           >
-                            <span>{opt}</span>
+                            <span>{renderMathText(opt)}</span>
                             {isAnswered && isThisCorrect && (
                               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                             )}
@@ -626,17 +625,16 @@ export const EvaluationModule: React.FC<EvaluationModuleProps> = ({ isPresentati
 
                   {isAnswered && (
                     <div
-                      className={`p-3 rounded-lg border text-xs leading-relaxed ${
-                        isCorrect
+                      className={`p-3 rounded-lg border text-xs leading-relaxed ${isCorrect
                           ? 'bg-emerald-50/60 border-emerald-200 text-emerald-950'
                           : 'bg-amber-50/70 border-amber-200 text-slate-800'
-                      }`}
+                        }`}
                     >
                       <div className="font-semibold mb-0.5 flex items-center gap-1.5">
                         <HelpCircle className="w-3.5 h-3.5 shrink-0" />
                         <span>{isCorrect ? '¡Respuesta Correcta!' : 'Fundamento Teórico:'}</span>
                       </div>
-                      {q.explanation}
+                      {renderMathText(q.explanation)}
                     </div>
                   )}
                 </div>

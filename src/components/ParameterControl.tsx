@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderMathText } from '../utils/mathFormat';
 
 interface ParameterControlProps {
   label: string;
@@ -52,9 +53,9 @@ export const ParameterControl: React.FC<ParameterControlProps> = ({
     <div className="py-2.5 border-b border-slate-100 last:border-b-0">
       <div className="flex items-center justify-between gap-2 mb-1.5">
         <label className={`font-medium text-slate-800 ${isPresentationMode ? 'text-base' : 'text-sm'}`}>
-          {label}{' '}
+          {renderMathText(label)}{' '}
           <span className={`font-mono font-semibold ${symbolBadgeColor}`}>
-            ({symbol})
+            ({renderMathText(symbol)})
           </span>
         </label>
         <div className="flex items-center gap-1.5 shrink-0">
@@ -96,7 +97,7 @@ export const ParameterControl: React.FC<ParameterControlProps> = ({
       </div>
 
       {helperText && (
-        <p className="mt-1 text-xs text-slate-500">{helperText}</p>
+        <p className="mt-1 text-xs text-slate-500">{renderMathText(helperText)}</p>
       )}
     </div>
   );
